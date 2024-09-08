@@ -6,28 +6,36 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [cities, setCities] = useState([]);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await fetch('https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?limit=100');
-        const data = await response.json();
-        setCities(data.results); // Adjust based on actual response structure
+        if (offset < 9900) {
+          const response = await fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?limit=100&offset=${offset}`);
+          const data = await response.json();
+          setCities(prevCities => [...prevCities, ...data.results]); // Adjust based on actual response structure
+        }
       } catch (error) {
         console.error('Error fetching cities:', error);
       }
     };
 
     fetchCities();
-  }, []);
+  }, [offset]);
+
+  const handleOffsetChange = (newOffset) => {
+    setOffset(newOffset);
+    // Here you can also fetch the new data based on the updated offset
+  };
 
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<City cities={cities} />} />
+          <Route path="/" element={<City cities={cities} handleOffsetChange={handleOffsetChange} />} />
           <Route path="/weather" element={<Weather />} />
-          <Route element={<h1>Page Not Found</h1>} />
+          <Route path="*" element={<h1 style={{color: 'red'}}>Page Not Found</h1>} />
         </Routes>
       </div>
     </Router>
