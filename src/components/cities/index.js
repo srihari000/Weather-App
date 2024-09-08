@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import './index.css';
+import { Link } from 'react-router-dom';
 
 function City({ cities }) {
     const [sortConfig, setSortConfig] = useState({ key: 'name', direction: 'ascending' });
@@ -61,7 +62,10 @@ function City({ cities }) {
         event.stopPropagation(); // Prevents the click event from reaching the filter inputs
         requestSort(key);
     };
-
+    const handleCityClick = (city_name) => (event) => {
+        event.preventDefault();
+        console.log(city_name)
+    }
     return (
         <div>
             <h2>City List</h2>
@@ -125,7 +129,11 @@ function City({ cities }) {
                 <tbody>
                     {sortedAndFilteredCities.map(city => (
                         <tr key={city.geoname_id}>
-                            <td>{city.name}</td>
+                            <td>
+                                <Link to={`/weather?city_name=${city.name}`} >
+                                    {city.name}
+                                </Link>
+                            </td>
                             <td>{city.country_code}</td>
                             <td>{city.population}</td>
                             <td>{city.elevation || 'N/A'}</td>

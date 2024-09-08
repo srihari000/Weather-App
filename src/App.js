@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import City from './components/cities'; // Assume this component is set up to handle a list of cities
 import Weather from './components/weather';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [cities, setCities] = useState([]);
@@ -21,15 +22,18 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      {cities.length > 0 ? (
-        <City cities={cities} />
-      ) : (
-        <Weather />
-      )}
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<City cities={cities} />} />
+          <Route path="/weather" element={<Weather />} />
+          <Route element={<h1>Page Not Found</h1>} />
+        </Routes>
+      </div>
+    </Router>
+
   );
+
 }
 
 export default App;
