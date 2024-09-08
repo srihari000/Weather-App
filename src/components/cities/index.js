@@ -9,9 +9,8 @@ function City({ cities, handleOffsetChange }) {
 
     const [filters, setFilters] = useState({
         name: '',
-        country_code: '',
-        population: '',
-        elevation: ''
+        cou_name_en: '',
+        timezone: ''
     });
 
     const sortedAndFilteredCities = useMemo(() => {
@@ -24,7 +23,6 @@ function City({ cities, handleOffsetChange }) {
                     city[key].toString().toLowerCase().includes(filters[key].toLowerCase()))
             )
         );
-
         // Apply sorting
         if (sortConfig !== null) {
             filteredCities.sort((a, b) => {
@@ -62,8 +60,7 @@ function City({ cities, handleOffsetChange }) {
         requestSort(key);
     };
     function calculateRowHeight(index) {
-        // Replace with actual calculation determining the row height.
-        return 50;
+        return 50;  // Replace with actual calculation determining the row height.
     }
     return (
         <div style={{ height: '100vh' }}>
@@ -83,28 +80,28 @@ function City({ cities, handleOffsetChange }) {
                             onClick={(e) => e.stopPropagation()} // Prevent sorting when clicking on the input
                         />
                     </div>
-                    <div onClick={handleHeaderClick('country_code')}>
+                    <div onClick={handleHeaderClick('cou_name_en')}>
                         <span className="colomn_title">Country Name </span>
-                        {sortConfig.key === 'country_code' ? (sortConfig.direction === 'ascending' ? ' ⬆️' : '⬇️ ') : ''}
+                        {sortConfig.key === 'cou_name_en' ? (sortConfig.direction === 'ascending' ? ' ⬆️' : '⬇️ ') : ''}
                         <br />
                         <input
                             type="text"
                             placeholder="Filter"
-                            value={filters.country_code}
-                            onChange={handleFilterChange('country_code')}
+                            value={filters.cou_name_en}
+                            onChange={handleFilterChange('cou_name_en')}
                             className="filter-input"
                             onClick={(e) => e.stopPropagation()} // Prevent sorting when clicking on the input
                         />
                     </div>
-                    <div onClick={handleHeaderClick('population')}>
+                    <div onClick={handleHeaderClick('timezone')}>
                         <span className="colomn_title">TimeZone</span>
-                        {sortConfig.key === 'population' ? (sortConfig.direction === 'ascending' ? ' ⬆️' : '⬇️ ') : ''}
+                        {sortConfig.key === 'timezone' ? (sortConfig.direction === 'ascending' ? ' ⬆️' : '⬇️ ') : ''}
                         <br />
                         <input
                             type="text"
                             placeholder="Filter"
-                            value={filters.population}
-                            onChange={handleFilterChange('population')}
+                            value={filters.timezone}
+                            onChange={handleFilterChange('timezone')}
                             className="filter-input"
                             onClick={(e) => e.stopPropagation()} // Prevent sorting when clicking on the input
                         />
@@ -112,7 +109,6 @@ function City({ cities, handleOffsetChange }) {
                 </div>
                 <div style={{ height: '100vh', width: '100vh' }}>
                     <AutoSizer>
-
                         {({ height, width }) => (
                             <List
                                 className="List"
@@ -142,14 +138,11 @@ function City({ cities, handleOffsetChange }) {
                                 }}
                             </List>
                         )}
-
                     </AutoSizer>
                 </div>
             </div>
         </div>
     );
-
-
 }
 
 export default City;
