@@ -5,36 +5,6 @@
     margin: 0 auto;
 }
 
-.city-table th,
-.city-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-    white-space: nowrap;
-}
-
-.city-table th {
-    background-color: #f4f4f4;
-    cursor: pointer;
-    /* Indicates that the header is clickable */
-    position: relative;
-    /* For positioning sort icons */
-}
-
-.city-table th:hover {
-    background-color: #e0e0e0;
-    /* Highlight on hover */
-}
-
-.city-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.city-table tr:hover {
-    background-color: #f1f1f1;
-    /* Highlight on row hover */
-}
-
 /* Filter input styling */
 .filter-input {
     margin-top: 4px;
@@ -118,4 +88,52 @@
         font-weight: bold;
         white-space: nowrap;
     }
+}
+
+.city-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.city-table > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #000;
+}
+
+.city-table > div > div {
+    width: 33%;
+    /* position: relative; */
+}
+
+.filter-input {
+    width: 70%;
+    margin-top: 10px;
+}
+
+
+
+.table_row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+
+    /* border-bottom: 1px solid #ddd; */
+}
+
+a.custom_link:-webkit-any-link {
+    color: inherit !important;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+.table_data_name,
+.table_data_country,
+.table_data_timezone {
+    width: 33%;
+}
+
+.colomn_title {
+    cursor: pointer;
 }
