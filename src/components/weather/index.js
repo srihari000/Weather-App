@@ -87,7 +87,7 @@ const Weather = () => {
     };
 
     fetchWeatherData();
-  }, [location.search]);
+  }, []);
 
   if (loading) return (
     <div className="spinner-container">
@@ -166,7 +166,7 @@ const Weather = () => {
                   </div>
                   <div className="info-item">
                     <span className="heading">Precipitation Chances:</span>
-                    <span className="value">{`${forecast.pop * 100}%` || 'N/A'}</span>
+                    <span className="value">{`${forecast.pop.toFixed(2) * 100}%` || 'N/A'}</span>
                   </div>
                 </div>
               </div>

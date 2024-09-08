@@ -5,6 +5,11 @@
     margin: 0 auto;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2eded;
+}
+
 /* Filter input styling */
 .filter-input {
     margin-top: 4px;
